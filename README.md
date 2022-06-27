@@ -95,7 +95,7 @@ cd html
 mkdir magento2
 cd magento2
 wget https://shared-redpolex.s3.ap-northeast-2.amazonaws.com/magento-ce-2.4.4_sample_data-2022-03-16-05-13-02.zip
-unzip -d magento-ce-2.4.4_sample_data-2022-03-16-05-13-02.zip .
+unzip magento-ce-2.4.4_sample_data-2022-03-16-05-13-02.zip -d .
 ```
 
 
