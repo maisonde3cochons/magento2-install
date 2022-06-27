@@ -82,11 +82,16 @@ sudo mv composer.phar /usr/bin/composer
 ```
 
 #### [STG.09] Magento2 Download
+
+https://magento.com/tech-resources/download 접속 후 다운로드 후 /var/www/html/magento2 폴더로 이동
+![image](https://user-images.githubusercontent.com/30817824/175862000-64f4abbf-3232-49ae-b230-350347efdb34.png)
+
+아래 명령어로 다운로드 받아도 됨
 ```
 cd /var/www/html
-git clone https://github.com/magento/magento2.git
-cd magento2/
-composer install
+mkdir magento2
+wget https://shared-redpolex.s3.ap-northeast-2.amazonaws.com/magento-ce-2.4.4_sample_data-2022-03-16-05-13-02.zip
+unzip -d magento-ce-2.4.4_sample_data-2022-03-16-05-13-02.zip .
 ```
 
 
