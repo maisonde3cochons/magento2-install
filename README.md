@@ -234,13 +234,13 @@ sudo chmod -R 777 /var/www/html/magento2/app/etc/
 sudo chmod -R 777 /var/www/html/magento2/generated/
 ```
 
-#### [STG.20] URL 접속 확인
+#### [STG.19] URL 접속 확인
 
-> ##### http://내IP
+> ##### http://MyIP
 
 ![image](https://user-images.githubusercontent.com/30817824/175865849-e83eda58-f845-433a-aa3d-ecea6a4168bb.png)
 
-#### [STG.19] cache 제거/production mode로 deploy/static content deploy ...etc.
+#### [STG.20] cache 제거/production mode로 deploy/static content deploy ...etc.
 
 ```
 magento sampledata:deploy
