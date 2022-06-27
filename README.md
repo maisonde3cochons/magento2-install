@@ -179,27 +179,38 @@ AddType application/x-httpd-php-source .phps
 #### [STG.15] elasticsearch install (https://github.com/maisonde3cochons/kafka-monitoring-elasticstack 참고)
 
 ```
+su ubuntu 
+cd ~
 curl -LO https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-7.10.2-linux-x86_64.tar.gz
 tar -xzf elasticsearch-oss-7.10.2-linux-x86_64.tar.gz
 rm -rf elasticsearch-oss-7.10.2-linux-x86_64.tar.gz
 
 # Background 실행
+cd elasticsearch-7.10.2
 ./bin/elasticsearch -d -p elastic_pid
+
+# 정상동작 확인
+curl -X GET "localhost:9200/?pretty"
 ```
+
+![image](https://user-images.githubusercontent.com/30817824/175864422-57cae7f4-e51e-4780-9db5-6ed271dd2346.png)
 
 ---------------------------------------
 
-#### [STG.16] Magento 설치(admin login 시 ID/PWD는 hong/redpolAdmin)
+#### [STG.16] Magento 설치(admin login 시 ID/PWD는 hong/hong123)
 ```
 cd /var/www/html/magento2/bin
-./magento setup:install --base-url=http://13.124.72.233 \
+./magento setup:install --base-url=http://<내 IP> \
 --db-host=localhost --db-name=magento2 --db-user=mg2user --db-password=redpolex \
 --admin-firstname=Magento --admin-lastname=User --admin-email=redpolex@yopmail.com \
---admin-user=hong --admin-password=redpolAdmin --language=en_US \
+--admin-user=hong --admin-password=hong123 --language=en_US \
 --currency=USD --use-rewrites=1 \
 --search-engine=elasticsearch7 --elasticsearch-host=localhost \
 --elasticsearch-port=9200
 ```
+
+![image](https://user-images.githubusercontent.com/30817824/175865111-e1a53b1f-6e34-4871-90b2-67bac74ae8de.png)
+
 
 #### [STG.17] Multi Factor 인증 제거(enable 시 admin 로그인 시 2factor 인증이 필요하지만 mail이 발송되려면 설정이 추가 필요함)
 ```
@@ -207,7 +218,29 @@ cd /var/www/html/magento2/bin
 ./magento module:disable Magento_TwoFactorAuth
 ```
 
-#### [STG.18] cache 제거/production mode로 deploy/static content deploy ...etc.
+#### [STG.18] Browser 통해 접속 확인 후 Error 확인 (Directory 권한 재설정)
+```
+cd /var/log/apache2
+tail -f ./error.log
+```
+![image](https://user-images.githubusercontent.com/30817824/175865735-20b8eb56-af96-4c71-9150-cdd38d766244.png)
+
+```
+sudo chown -R ubuntu:www-data /var/www/html/magento2/
+sudo chmod -R 755 /var/www/html/magento2/
+sudo chmod -R 777 /var/www/html/magento2/var/
+sudo chmod -R 777 /var/www/html/magento2/pub/
+sudo chmod -R 777 /var/www/html/magento2/app/etc/
+sudo chmod -R 777 /var/www/html/magento2/generated/
+```
+
+#### [STG.20] URL 접속 확인
+
+> ##### http://내IP
+
+![image](https://user-images.githubusercontent.com/30817824/175865849-e83eda58-f845-433a-aa3d-ecea6a4168bb.png)
+
+#### [STG.19] cache 제거/production mode로 deploy/static content deploy ...etc.
 
 ```
 magento sampledata:deploy
