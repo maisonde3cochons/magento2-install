@@ -23,6 +23,7 @@ sudo systemctl stop mariadb.service
 sudo systemctl start mariadb.service
 sudo systemctl enable mariadb.service
 
+# 초기 root password 설정
 sudo mysql_secure_installation
 ```
 
